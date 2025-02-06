@@ -1,38 +1,26 @@
 <?php
-
 namespace App\Models;
 
-class Product
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+class Product extends Model
 {
-    protected $productRepository;
+    use SoftDeletes;
 
-    public function __construct(ProductRepositoryInterface $productRepository)
-    {
-        $this->productRepository = $productRepository;
-    }
+    protected $primaryKey = 'id';
+    public $incrementing = false;
+    protected $keyType = 'string';
 
-    public function getAllProducts()
-    {
-        return $this->productRepository->all();
-    }
+    protected $fillable = [
+        'nome',
+        'preco',
+        'descricao',
+    ];
 
-    public function getProductById($id)
-    {
-        return $this->productRepository->find($id);
-    }
-
-    public function createProduct(array $data)
-    {
-        return $this->productRepository->create($data);
-    }
-
-    public function updateProduct($id, array $data)
-    {
-        return $this->productRepository->update($id, $data);
-    }
-
-    public function deleteProduct($id)
-    {
-        return $this->productRepository->delete($id);
-    }
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
+    ];
 }
