@@ -29,15 +29,15 @@ class ProductRepository implements ProductRepositoryInterface
 
     public function update($id, array $data)
     {
-        $user = $this->model->findOrFail($id);
-        $user->update($data);
-        return $user;
+        $product = $this->model->findOrFail($id);
+        $product->update($data);
+        return $product;
     }
 
     public function delete($id)
     {
-        $user = $this->model->findOrFail($id);
-        $user->delete();
-        return $user;
+        $product = $this->model->findOrFail($id);
+        $product->delete();
+        return $product;
     }
 }
