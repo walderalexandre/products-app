@@ -16,60 +16,26 @@ class ProductController extends Controller
 
     public function index(): JsonResponse
     {
-        try {
-            $products = $this->service->all();
-            return response()->json($products);
-        } catch (\Exception $e) {
-            return response()->json(['message' => $e->getMessage()], 500);
-        }
+        return $this->service->getAllProducts();
     }
 
     public function show($id): JsonResponse
     {
-        try {
-            $product = $this->service->find($id);
-            if (!$product) {
-                return response()->json(['message' => 'Produto não encontrado'], 404);
-            }
-            return response()->json($product);
-        } catch (\Exception $e) {
-            return response()->json(['message' => $e->getMessage()], 500);
-        }
+        return $this->service->getProductById($id);
     }
 
     public function store(ProductRequest $request): JsonResponse
     {
-        try {
-            $product = $this->service->create($request->validated());
-            return response()->json($product, 201);
-        } catch (\Exception $e) {
-            return response()->json(['message' => $e->getMessage()], 500);
-        }
+        return $this->service->createProduct($request->validated());
     }
 
     public function update(ProductRequest $request, $id): JsonResponse
     {
-        try {
-            $product = $this->service->update($id, $request->validated());
-            if (!$product) {
-                return response()->json(['message' => 'Produto não encontrado'], 404);
-            }
-            return response()->json($product);
-        } catch (\Exception $e) {
-            return response()->json(['message' => $e->getMessage()], 500);
-        }
+        return $this->service->updateProduct($id, $request->validated());
     }
 
     public function destroy($id): JsonResponse
     {
-        try {
-            $product = $this->service->delete($id);
-            if (!$product) {
-                return response()->json(['message' => 'Produto não encontrado'], 404);
-            }
-            return response()->json(['message' => 'Produto excluído com sucesso']);
-        } catch (\Exception $e) {
-            return response()->json(['message' => $e->getMessage()], 500);
-        }
+        return $this->service->deleteProduct($id);
     }
 }
