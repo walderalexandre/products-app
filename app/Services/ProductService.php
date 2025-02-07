@@ -2,6 +2,7 @@
 namespace App\Services;
 
 use App\Repositories\ProductRepositoryInterface;
+use App\Http\Resources\ProductResource;
 
 class ProductService
 {
