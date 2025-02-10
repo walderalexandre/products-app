@@ -32,8 +32,6 @@ class ProductService
 
     public function createProduct(array $data): Product
     {
-       // Lógica de negócio opcional aqui (ex: validar dados, etc.)
-
         return $this->productRepository->create($data);
     }
 

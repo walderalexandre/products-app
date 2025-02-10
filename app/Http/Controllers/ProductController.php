@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Http\Requests\ProductRequest;
 use App\Services\ProductService;
 use App\Http\Resources\ProductResource;
@@ -19,14 +20,17 @@ class ProductController extends Controller
         $this->service = $service;
     }
 
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
         try {
-            
-            
-            $products = $this->service->getAllProducts(10, 1);
+            $pageSize = $request->query('page_size', 10);
+            $page = $request->query('page', 1);
+
+            $products = $this->service->getAllProducts($pageSize, $page);
            
-            return response()->json(['data' => ProductResource::collection($products->items())], $products->isEmpty() ? 204 : 200);
+            return response()->json(['data' => ProductResource::collection($products->items()),
+                                     'meta' => ['current_page' => $products->currentPage()]],
+                                     $products->isEmpty() ? 204 : 200);
         } catch (Throwable $e) {
             $this->logError($e);
             return $this->errorResponse('Erro ao listar produtos.');
