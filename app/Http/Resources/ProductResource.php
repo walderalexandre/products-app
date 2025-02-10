@@ -19,9 +19,10 @@ class ProductResource extends JsonResource
             'id' => $this->id,
             'nome' => $this->nome,
             'preco' => $this->preco,
+            'preco_formatado' => formatCurrency($this->preco),
             'descricao' => $this->descricao,
-            'created_at' => $this->created_at->format('d/m/Y H:i:s'), // Formata a data
-            'updated_at' => $this->updated_at->format('d/m/Y H:i:s'), // Formata a data
+            'created_at' => formatDate($this->created_at),
+            'updated_at' => formatDate($this->updated_at),
         ];
     }
 }

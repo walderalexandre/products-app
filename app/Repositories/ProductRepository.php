@@ -1,7 +1,9 @@
 <?php
+
 namespace App\Repositories;
 
 use App\Models\Product;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ProductRepository implements ProductRepositoryInterface
 {
@@ -17,9 +19,14 @@ class ProductRepository implements ProductRepositoryInterface
         return $this->model->all();
     }
 
+    public function paginate(int $pageSize, int $page)
+    {
+        return $this->model->paginate($pageSize, ['*'], 'page', $page);
+    }
+
     public function find($id)
     {
-        return $this->model->find($id);
+        return $this->model->findOrFail($id);
     }
 
     public function create(array $data)
@@ -29,19 +36,20 @@ class ProductRepository implements ProductRepositoryInterface
 
     public function update($id, array $data)
     {
-        $product = $this->model->find($id);
-        if ($product) {
-            $product->update($data);
-        }
+        $product = $this->model->findOrFail($id);
+        $product->update($data);
         return $product;
     }
 
     public function delete($id)
     {
-        $product = $this->model->find($id);
-        if ($product) {
-            $product->delete();
-        }
+        $product = $this->model->findOrFail($id);
+        $product->delete();
         return $product;
+    }
+
+    public function findByField(string $field, $value)
+    {
+        return $this->model->where($field, $value)->get();
     }
 }
