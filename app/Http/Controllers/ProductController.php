@@ -27,9 +27,11 @@ class ProductController extends Controller
             $page = $request->query('page', 1);
 
             $products = $this->service->getAllProducts($pageSize, $page);
-           
+    
             return response()->json(['data' => ProductResource::collection($products->items()),
-                                     'meta' => ['current_page' => $products->currentPage()]],
+                                     'meta' => ['current_page' => $products->currentPage(),
+                                                'total' => $products->total(),
+                                                'lastPage' => $products->lastPage()]],
                                      $products->isEmpty() ? 204 : 200);
         } catch (Throwable $e) {
             $this->logError($e);
