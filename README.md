@@ -5,10 +5,11 @@ Este é o back-end do projeto, desenvolvido em **Laravel**. Ele fornece uma API 
 ## Tecnologias Utilizadas
 
 - **Laravel**: Framework PHP para desenvolvimento web.
-- **MySQL**: Banco de dados relacional.
+- **MariaDB**: Banco de dados relacional.
 - **API RESTful**: Endpoints para manipulação de dados.
 - **UUID**: Identificadores únicos para os registros.
 - **Resources**: Transformação de dados para respostas da API.
+- **PHPUnit**: Para testes de features
 
 ## Requisitos
 
@@ -40,13 +41,10 @@ Este é o back-end do projeto, desenvolvido em **Laravel**. Ele fornece uma API 
     ```bash
     php artisan migrate
 
-    (Opcional) Popule o banco de dados com dados de teste:
-    ```bash
-    php artisan db:seed
-
 6. Inicie o servidor:
     ```bash
     php artisan serve
+
     O servidor estará disponível em http://localhost:8000.
 
 
@@ -61,3 +59,10 @@ Este é o back-end do projeto, desenvolvido em **Laravel**. Ele fornece uma API 
     PUT /api/products/{id}: Atualiza um produto existente.
 
     DELETE /api/products/{id}: Exclui um produto.
+
+## Execução dos testes
+
+O projeto utiliza PHPUnit para testes automatizados.
+
+    ```bash
+    ./vendor/bin/phpunit
