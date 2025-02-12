@@ -3,8 +3,6 @@
 namespace App\Services;
 
 use App\Repositories\ProductRepositoryInterface;
-use App\Exceptions\ProductNotFoundException;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Models\Product;
 
 class ProductService

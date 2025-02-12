@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\ProductRepositoryInterface;
 use App\Repositories\ProductRepository;
+use App\Services\ProductService;
 
 class AppServiceProvider extends ServiceProvider
 {

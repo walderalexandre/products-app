@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Models\Product;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ProductRepository implements ProductRepositoryInterface
 {
@@ -16,12 +15,12 @@ class ProductRepository implements ProductRepositoryInterface
 
     public function all()
     {
-        return $this->model->all();
+        return $this->model->all()->sortBy("nome");
     }
 
     public function paginate(int $pageSize, int $page)
     {
-        return $this->model->paginate($pageSize, ['*'], 'page', $page);
+        return $this->model->orderBy('nome')->paginate($pageSize, ['*'], 'page', $page);
     }
 
     public function find($id)

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -27,7 +28,7 @@ class Product extends Model
         'deleted_at',
     ];
 
-     protected static function boot()
+    protected static function boot()
     {
         parent::boot();
 
