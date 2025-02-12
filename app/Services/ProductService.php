@@ -18,16 +18,12 @@ class ProductService
 
     public function getAllProducts(int $pageSize, int $page)
     {
-        return $this->productRepository->paginate($pageSize, $page); // Chama o método paginate do repository
+        return $this->productRepository->paginate($pageSize, $page);
     }
 
     public function getProductById($id)
     {
-        try {
-            return $this->productRepository->find($id);
-        } catch (ModelNotFoundException $e) {
-            throw new ProductNotFoundException("Produto não encontrado", 404);
-        }
+        return $this->productRepository->find($id);
     }
 
     public function createProduct(array $data): Product
@@ -37,19 +33,11 @@ class ProductService
 
     public function updateProduct($id, array $data): Product
     {
-        try {
-            return $this->productRepository->update($id, $data);
-        } catch (ModelNotFoundException $e) {
-            throw new ProductNotFoundException("Produto não encontrado", 404);
-        }
+        return $this->productRepository->update($id, $data);
     }
 
     public function deleteProduct($id): Product
     {
-        try {
-            return $this->productRepository->delete($id);
-        } catch (ModelNotFoundException $e) {
-            throw new ProductNotFoundException("Produto não encontrado", 404);
-        }
+        return $this->productRepository->delete($id);
     }
 }
